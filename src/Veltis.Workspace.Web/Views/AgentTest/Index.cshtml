@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Teste do Motor de Agentes";
+}
+
+<div class="container mx-auto max-w-5xl py-8">
+
+    <h1 class="text-3xl font-bold mb-6">
+        Teste do Framework Universal de Agentes
+    </h1>
+
+    <form method="post" class="space-y-4">
+
+        <div>
+            <label>Título</label>
+            <input
+                name="title"
+                class="border rounded w-full p-2" />
+        </div>
+
+        <div>
+            <label>Descrição</label>
+            <textarea
+                rows="6"
+                name="description"
+                class="border rounded w-full p-2"></textarea>
+        </div>
+
+        <button
+            class="bg-blue-600 text-white px-5 py-2 rounded">
+            Executar Pipeline
+        </button>
+
+    </form>
+
+    @if(ViewBag.Prompt != null)
+    {
+        <hr class="my-8"/>
+
+        <h2 class="text-xl font-semibold">
+            Prompt Gerado
+        </h2>
+
+        <pre class="bg-gray-100 p-4 rounded">@ViewBag.Prompt</pre>
+
+        <h2 class="text-xl font-semibold mt-6">
+            Resposta Simulada
+        </h2>
+
+        <pre class="bg-gray-100 p-4 rounded">@ViewBag.Response</pre>
+    }
+
+</div>
