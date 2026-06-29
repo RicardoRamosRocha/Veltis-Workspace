@@ -9,6 +9,7 @@ using Veltis.Workspace.Application.Notifications;
 using Veltis.Workspace.Application.Permissions;
 using Veltis.Workspace.Application.Professions;
 using Veltis.Workspace.Application.Workspaces;
+using Veltis.Workspace.Application.Agents.Execution;
 
 namespace Veltis.Workspace.Application;
 
@@ -40,6 +41,8 @@ public static class DependencyInjection
         services.AddScoped<IFormVersioningService, FormVersioningService>();
         services.AddScoped<IFormSubmissionService, FormSubmissionService>();
         services.AddScoped<IFormImportExportService, FormImportExportService>();
+        services.AddScoped<IExecutionPromptBuilder, ExecutionPromptBuilder>();
+        services.AddScoped<IAgentExecutionPipeline, AgentExecutionPipeline>();
 
         return services;
     }
