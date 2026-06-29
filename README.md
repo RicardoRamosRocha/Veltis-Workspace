@@ -54,26 +54,50 @@ assets/
 
 ## Execução local
 
-1. Suba o PostgreSQL:
+### Opção A — Desenvolvimento local simples
+
+Use uma instalação local do PostgreSQL e configure a senha em `src/Veltis.Workspace.Web/appsettings.Development.json`:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=veltis_workspace;Username=postgres;Password=SUA_SENHA_DO_POSTGRES"
+  }
+}
+```
+
+Não coloque senha real em arquivos versionados. Substitua `SUA_SENHA_DO_POSTGRES` apenas no ambiente local.
+
+Depois execute:
+
+```powershell
+dotnet restore Veltis.Workspace.sln --configfile NuGet.Config
+dotnet build Veltis.Workspace.sln
+dotnet ef database update --project src/Veltis.Workspace.Infrastructure --startup-project src/Veltis.Workspace.Web
+dotnet run --project src/Veltis.Workspace.Web
+```
+
+### Opção B — Docker
+
+O Docker Compose usa um usuário próprio do container:
+
+- `Username=veltis`
+- `Password=veltis_dev_password`
+- `Database=veltis_workspace`
+
+Suba o PostgreSQL:
 
 ```powershell
 docker compose up -d postgres
 ```
 
-2. Restaure e compile:
-
-```powershell
-dotnet restore Veltis.Workspace.sln --configfile NuGet.Config
-dotnet build Veltis.Workspace.sln
-```
-
-3. Aplique migrations quando forem geradas:
+Para aplicar migrations usando o PostgreSQL do Docker, use uma connection string compatível com o container ou ajuste temporariamente o arquivo local de desenvolvimento:
 
 ```powershell
 dotnet ef database update --project src/Veltis.Workspace.Infrastructure --startup-project src/Veltis.Workspace.Web
 ```
 
-4. Execute a aplicação:
+Execute a aplicação:
 
 ```powershell
 dotnet run --project src/Veltis.Workspace.Web

@@ -9,6 +9,7 @@ using Veltis.Workspace.Domain.Common;
 using Veltis.Workspace.Domain.Constants;
 using Veltis.Workspace.Domain.Entities;
 using Veltis.Workspace.Domain.FeatureFlags;
+using Veltis.Workspace.Domain.Forms;
 using Veltis.Workspace.Domain.Identity;
 using Veltis.Workspace.Domain.Notifications;
 using Veltis.Workspace.Domain.Observability;
@@ -60,6 +61,7 @@ public sealed class ApplicationDbContext
     public DbSet<Agent> Agents => Set<Agent>();
     public DbSet<PromptTemplate> PromptTemplates => Set<PromptTemplate>();
     public DbSet<FormDefinition> FormDefinitions => Set<FormDefinition>();
+    public DbSet<FormSubmission> FormSubmissions => Set<FormSubmission>();
     public DbSet<AIProvider> AIProviders => Set<AIProvider>();
     public DbSet<AIModel> AIModels => Set<AIModel>();
     public DbSet<AgentExecution> AgentExecutions => Set<AgentExecution>();
@@ -347,7 +349,23 @@ public sealed class ApplicationDbContext
             entity.ToTable("form_definitions");
             entity.Property(form => form.Name).HasMaxLength(160).IsRequired();
             entity.Property(form => form.Description).HasMaxLength(500);
-            entity.Property(form => form.JsonSchema).IsRequired();
+            entity.Property(form => form.JsonSchema).IsRequired().HasDefaultValue("{}");
+            entity.Property(form => form.SchemaJson).IsRequired().HasDefaultValue("{}");
+            entity.Property(form => form.Category).HasMaxLength(120);
+            entity.Property(form => form.Icon).HasMaxLength(80);
+            entity.Property(form => form.IsPublished).HasDefaultValue(false);
+            entity.HasIndex(form => new { form.TenantId, form.Name, form.Version });
+        });
+
+        builder.Entity<FormSubmission>(entity =>
+        {
+            entity.ToTable("form_submissions");
+            entity.Property(submission => submission.ValuesJson).IsRequired();
+            entity.HasOne<FormDefinition>()
+                .WithMany()
+                .HasForeignKey(submission => submission.FormDefinitionId)
+                .OnDelete(DeleteBehavior.Restrict);
+            entity.HasIndex(submission => new { submission.TenantId, submission.FormDefinitionId });
         });
 
         builder.Entity<AIProvider>(entity =>

@@ -3,6 +3,8 @@ using Veltis.Workspace.Application.Agents.Interfaces;
 using Veltis.Workspace.Application.Agents.Services;
 using Veltis.Workspace.Application.Dashboard;
 using Veltis.Workspace.Application.FeatureFlags;
+using Veltis.Workspace.Application.Forms.Interfaces;
+using Veltis.Workspace.Application.Forms.Services;
 using Veltis.Workspace.Application.Notifications;
 using Veltis.Workspace.Application.Permissions;
 using Veltis.Workspace.Application.Professions;
@@ -26,10 +28,18 @@ public static class DependencyInjection
         services.AddScoped<IPromptBuilder, PromptBuilder>();
         services.AddScoped<IPromptRenderer, PromptRenderer>();
         services.AddScoped<IAIModelSelector, AIModelSelector>();
-        services.AddScoped<IFormRenderer, FormRenderer>();
+        services.AddScoped<Veltis.Workspace.Application.Agents.Interfaces.IFormRenderer, Veltis.Workspace.Application.Agents.Services.FormRenderer>();
         services.AddScoped<IAgentHistoryService, AgentHistoryService>();
         services.AddScoped<IDocumentGenerator, DocumentGenerator>();
         services.AddScoped<IAIProvider, ArchitectureOnlyAIProvider>();
+        services.AddScoped<IFormSchemaParser, FormSchemaParser>();
+        services.AddScoped<IValidationEngine, ValidationEngine>();
+        services.AddScoped<IFieldFactory, FieldFactory>();
+        services.AddScoped<Veltis.Workspace.Application.Forms.Interfaces.IFormRenderer, Veltis.Workspace.Application.Forms.Services.FormRenderer>();
+        services.AddScoped<IFormStateService, FormStateService>();
+        services.AddScoped<IFormVersioningService, FormVersioningService>();
+        services.AddScoped<IFormSubmissionService, FormSubmissionService>();
+        services.AddScoped<IFormImportExportService, FormImportExportService>();
 
         return services;
     }

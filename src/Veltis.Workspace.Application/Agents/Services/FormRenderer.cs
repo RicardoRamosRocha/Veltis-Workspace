@@ -9,14 +9,18 @@ public sealed class FormRenderer : IFormRenderer
 {
     public Result Validate(FormDefinition formDefinition, IReadOnlyDictionary<string, string> formData)
     {
-        if (string.IsNullOrWhiteSpace(formDefinition.JsonSchema))
+        string schemaJson = string.IsNullOrWhiteSpace(formDefinition.SchemaJson) || formDefinition.SchemaJson == "{}"
+            ? formDefinition.JsonSchema
+            : formDefinition.SchemaJson;
+
+        if (string.IsNullOrWhiteSpace(schemaJson))
         {
             return Result.Success();
         }
 
         try
         {
-            using JsonDocument document = JsonDocument.Parse(formDefinition.JsonSchema);
+            using JsonDocument document = JsonDocument.Parse(schemaJson);
 
             if (!document.RootElement.TryGetProperty("required", out JsonElement required))
             {
@@ -29,7 +33,7 @@ public sealed class FormRenderer : IFormRenderer
                 string? fieldName = field.GetString();
                 if (!string.IsNullOrWhiteSpace(fieldName) && !formData.ContainsKey(fieldName))
                 {
-                    errors.Add(new ValidationError(fieldName, $"O campo '{fieldName}' e obrigatorio."));
+                    errors.Add(new ValidationError(fieldName, $"O campo '{fieldName}' é obrigatório."));
                 }
             }
 
@@ -37,7 +41,7 @@ public sealed class FormRenderer : IFormRenderer
         }
         catch (JsonException)
         {
-            return Result.Failure("Schema do formulario invalido.");
+            return Result.Failure("Schema do formulário inválido.");
         }
     }
 }

@@ -1,0 +1,37 @@
+namespace Veltis.Workspace.Application.Forms;
+
+public enum DynamicFieldType
+{
+    Textbox,
+    Textarea,
+    Number,
+    Decimal,
+    Currency,
+    Email,
+    Password,
+    Phone,
+    CPF,
+    CNPJ,
+    Date,
+    Time,
+    DateTime,
+    Checkbox,
+    Radio,
+    Switch,
+    Select,
+    MultiSelect,
+    Tags,
+    Color,
+    Url,
+    File,
+    Image,
+    Json,
+    Markdown,
+    RichText,
+    Hidden,
+    Label,
+    Divider,
+    Section,
+    Repeater,
+    Grid
+}

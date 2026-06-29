@@ -1,0 +1,122 @@
+@model DynamicFieldRenderModel
+
+@{
+    string widthClass = Model.Width switch
+    {
+        "1/2" => "md:col-span-6",
+        "1/3" => "md:col-span-4",
+        "2/3" => "md:col-span-8",
+        "1/4" => "md:col-span-3",
+        _ => "md:col-span-12"
+    };
+
+    string commonAttributes = Model.ReadOnly ? "readonly" : string.Empty;
+}
+
+@if (Model.Visible)
+{
+    <div class="@widthClass @Model.CssClass">
+        @switch (Model.Type)
+        {
+            case DynamicFieldType.Label:
+                <p class="text-sm font-medium text-zinc-700 dark:text-zinc-200">@Model.Label</p>
+                break;
+            case DynamicFieldType.Divider:
+                <hr class="border-zinc-200 dark:border-zinc-800" />
+                break;
+            case DynamicFieldType.Section:
+                <section class="space-y-4 rounded border border-zinc-200 p-4 dark:border-zinc-800">
+                    <h3 class="text-sm font-semibold text-zinc-950 dark:text-zinc-50">@Model.Label</h3>
+                    @foreach (DynamicFieldRenderModel child in Model.Children)
+                    {
+                        <partial name="Forms/_DynamicField" model="child" />
+                    }
+                </section>
+                break;
+            case DynamicFieldType.Textarea:
+            case DynamicFieldType.Markdown:
+            case DynamicFieldType.RichText:
+            case DynamicFieldType.Json:
+                <label class="vw-field">
+                    <span class="vw-label">@Model.Label</span>
+                    <textarea name="@Model.Name" id="@Model.Id" placeholder="@Model.Placeholder" class="vw-input min-h-32" @commonAttributes>@Model.DefaultValue</textarea>
+                    @if (!string.IsNullOrWhiteSpace(Model.HelpText))
+                    {
+                        <span class="vw-help">@Model.HelpText</span>
+                    }
+                </label>
+                break;
+            case DynamicFieldType.Select:
+            case DynamicFieldType.MultiSelect:
+                <label class="vw-field">
+                    <span class="vw-label">@Model.Label</span>
+                    <select name="@Model.Name" id="@Model.Id" class="vw-input" multiple="@(Model.Type == DynamicFieldType.MultiSelect ? "multiple" : null)" disabled="@(Model.ReadOnly ? "disabled" : null)">
+                        @foreach (FieldOption option in Model.Options)
+                        {
+                            <option value="@option.Value">@option.Label</option>
+                        }
+                    </select>
+                    @if (!string.IsNullOrWhiteSpace(Model.HelpText))
+                    {
+                        <span class="vw-help">@Model.HelpText</span>
+                    }
+                </label>
+                break;
+            case DynamicFieldType.Checkbox:
+            case DynamicFieldType.Switch:
+                <label class="flex items-center gap-3 rounded border border-zinc-200 p-3 text-sm dark:border-zinc-800">
+                    <input type="checkbox" name="@Model.Name" id="@Model.Id" class="h-4 w-4 rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950" disabled="@(Model.ReadOnly ? "disabled" : null)" />
+                    <span class="font-medium text-zinc-700 dark:text-zinc-200">@Model.Label</span>
+                </label>
+                break;
+            case DynamicFieldType.Radio:
+                <fieldset class="space-y-2">
+                    <legend class="vw-label">@Model.Label</legend>
+                    @foreach (FieldOption option in Model.Options)
+                    {
+                        <label class="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-200">
+                            <input type="radio" name="@Model.Name" value="@option.Value" class="h-4 w-4 border-zinc-300 text-zinc-950 focus:ring-zinc-950" disabled="@(Model.ReadOnly ? "disabled" : null)" />
+                            <span>@option.Label</span>
+                        </label>
+                    }
+                </fieldset>
+                break;
+            case DynamicFieldType.Hidden:
+                <input type="hidden" name="@Model.Name" id="@Model.Id" value="@Model.DefaultValue" />
+                break;
+            default:
+                <label class="vw-field">
+                    <span class="vw-label">@Model.Label</span>
+                    <input type="@InputType(Model.Type)" name="@Model.Name" id="@Model.Id" value="@Model.DefaultValue" placeholder="@Model.Placeholder" class="vw-input" @commonAttributes />
+                    @if (!string.IsNullOrWhiteSpace(Model.HelpText))
+                    {
+                        <span class="vw-help">@Model.HelpText</span>
+                    }
+                </label>
+                break;
+        }
+    </div>
+}
+
+@functions {
+    private static string InputType(DynamicFieldType type)
+    {
+        return type switch
+        {
+            DynamicFieldType.Number => "number",
+            DynamicFieldType.Decimal => "number",
+            DynamicFieldType.Currency => "number",
+            DynamicFieldType.Email => "email",
+            DynamicFieldType.Password => "password",
+            DynamicFieldType.Phone => "tel",
+            DynamicFieldType.Date => "date",
+            DynamicFieldType.Time => "time",
+            DynamicFieldType.DateTime => "datetime-local",
+            DynamicFieldType.Color => "color",
+            DynamicFieldType.Url => "url",
+            DynamicFieldType.File => "file",
+            DynamicFieldType.Image => "file",
+            _ => "text"
+        };
+    }
+}

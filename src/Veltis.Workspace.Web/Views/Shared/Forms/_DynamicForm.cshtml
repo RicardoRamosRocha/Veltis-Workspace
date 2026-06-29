@@ -1,0 +1,24 @@
+@model DynamicFormRenderModel
+
+<form class="vw-form space-y-6" data-form-id="@Model.FormId" data-form-version="@Model.Version" data-preview="@Model.IsPreview.ToString().ToLowerInvariant()">
+    <div class="space-y-1">
+        <div class="flex items-center gap-3">
+            <h2 class="text-lg font-semibold text-zinc-950 dark:text-zinc-50">@Model.Name</h2>
+            @if (Model.IsPreview)
+            {
+                <span class="vw-badge">Preview</span>
+            }
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">@Model.Description</p>
+        }
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-12">
+        @foreach (DynamicFieldRenderModel field in Model.Fields)
+        {
+            <partial name="Forms/_DynamicField" model="field" />
+        }
+    </div>
+</form>

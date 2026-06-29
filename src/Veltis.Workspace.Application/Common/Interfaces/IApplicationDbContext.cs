@@ -4,6 +4,7 @@ using Veltis.Workspace.Domain.Agents;
 using Veltis.Workspace.Domain.Billing;
 using Veltis.Workspace.Domain.Entities;
 using Veltis.Workspace.Domain.FeatureFlags;
+using Veltis.Workspace.Domain.Forms;
 using Veltis.Workspace.Domain.Identity;
 using Veltis.Workspace.Domain.Notifications;
 using Veltis.Workspace.Domain.Observability;
@@ -43,6 +44,7 @@ public interface IApplicationDbContext
     DbSet<Agent> Agents { get; }
     DbSet<PromptTemplate> PromptTemplates { get; }
     DbSet<FormDefinition> FormDefinitions { get; }
+    DbSet<FormSubmission> FormSubmissions { get; }
     DbSet<AIProvider> AIProviders { get; }
     DbSet<AIModel> AIModels { get; }
     DbSet<AgentExecution> AgentExecutions { get; }
