@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Veltis.Workspace.Domain.Constants;
 using Veltis.Workspace.Domain.Entities;
+using Veltis.Workspace.Domain.FeatureFlags;
 using Veltis.Workspace.Domain.Identity;
+using Veltis.Workspace.Domain.Permissions;
 using Veltis.Workspace.Infrastructure.Identity;
 
 namespace Veltis.Workspace.Infrastructure.Persistence;
@@ -50,29 +52,67 @@ public sealed class ApplicationDbContextSeeder
             _context.Professions.AddRange(
                 new Profession
                 {
-                    Name = "Advogado",
-                    Description = "Profissional juridico.",
-                    Icon = "scale",
+                    Name = "Perfil Base",
+                    Description = "Perfil profissional generico.",
+                    Icon = "user",
                     Color = "#0f766e",
-                    Slug = "advogado"
+                    Slug = "Perfil Base"
                 },
                 new Profession
                 {
-                    Name = "Contador",
-                    Description = "Profissional contabil e financeiro.",
-                    Icon = "calculator",
+                    Name = "Gestor",
+                    Description = "Perfil de gestao generico.",
+                    Icon = "settings",
                     Color = "#2563eb",
-                    Slug = "contador"
+                    Slug = "Gestor"
                 },
                 new Profession
                 {
-                    Name = "Consultor",
-                    Description = "Profissional de consultoria.",
-                    Icon = "briefcase",
+                    Name = "Analista",
+                    Description = "Profissional de Analistaia.",
+                    Icon = "chart",
                     Color = "#7c3aed",
-                    Slug = "consultor"
+                    Slug = "Analista"
                 });
 
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        if (!_context.Features.Any())
+        {
+            _context.Features.AddRange(
+                new Feature { Key = "ai", Name = "IA", EnabledByDefault = false },
+                new Feature { Key = "marketplace", Name = "Marketplace", EnabledByDefault = false },
+                new Feature { Key = "community", Name = "Comunidade", EnabledByDefault = false },
+                new Feature { Key = "pdf-export", Name = "Exportacao PDF", EnabledByDefault = false },
+                new Feature { Key = "word-export", Name = "Exportacao Word", EnabledByDefault = false },
+                new Feature { Key = "multiple-workspaces", Name = "Multiplos Workspaces", EnabledByDefault = false },
+                new Feature { Key = "api", Name = "API", EnabledByDefault = false },
+                new Feature { Key = "mobile-app", Name = "Aplicativo Mobile", EnabledByDefault = false });
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        if (!_context.PermissionGroups.Any())
+        {
+            var administration = new PermissionGroup
+            {
+                Name = "Administracao",
+                Key = "administration"
+            };
+
+            administration.Permissions.Add(new Permission
+            {
+                Name = "Gerenciar usuarios",
+                Key = PermissionConstants.ManageUsers
+            });
+            administration.Permissions.Add(new Permission
+            {
+                Name = "Gerenciar configuracoes",
+                Key = PermissionConstants.ManageSettings
+            });
+
+            _context.PermissionGroups.Add(administration);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
@@ -108,3 +148,4 @@ public sealed class ApplicationDbContextSeeder
         await _userManager.AddToRoleAsync(admin, ApplicationRoles.Administrator);
     }
 }
+

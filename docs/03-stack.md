@@ -1,4 +1,4 @@
-# Stack
+﻿# Stack
 
 ## Backend
 
@@ -18,11 +18,12 @@
 
 - Razor Views
 - Tailwind CSS
-- JavaScript vanilla para interacoes pequenas
+- JavaScript vanilla para interações pequenas
 - Layout responsivo com dark mode preparado
 
-## Operacao
+## Operação
 
 - Dockerfile multi-stage
 - Docker Compose com web e PostgreSQL
 - GitHub Actions para restore, build, test e publish
+

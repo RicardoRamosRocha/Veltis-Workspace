@@ -1,6 +1,6 @@
-# Veltis Workspace
+﻿# Veltis Workspace
 
-Veltis Workspace e uma plataforma SaaS de produtividade profissional baseada em inteligencia artificial. Esta Sprint 0 entrega a fundacao tecnica independente do produto, sem reaproveitamento de codigo de outros projetos.
+Veltis Workspace é uma plataforma SaaS de produtividade profissional baseada em inteligência artificial. Esta Sprint 0 entrega a fundação técnica independente do produto, sem reaproveitamento de código de outros projetos.
 
 ## Stack
 
@@ -17,25 +17,25 @@ Veltis Workspace e uma plataforma SaaS de produtividade profissional baseada em 
 
 ## GitHub
 
-Repositorio sugerido: `Veltis-Workspace`.
+Repositório sugerido: `Veltis-Workspace`.
 
 Branches:
 
 - `main`: branch principal.
 - `feature/nome-da-funcionalidade`: novas funcionalidades.
-- `fix/nome-da-correcao`: correcoes.
-- `docs/nome-da-documentacao`: documentacao.
-- `chore/nome-da-tarefa`: tarefas tecnicas.
+- `fix/nome-da-correção`: correções.
+- `docs/nome-da-documentação`: documentação.
+- `chore/nome-da-tarefa`: tarefas técnicas.
 
 Commits:
 
 - `feat: nova funcionalidade`
-- `fix: correcao`
-- `docs: documentacao`
-- `refactor: refatoracao`
-- `chore: tarefa tecnica`
+- `fix: correção`
+- `docs: documentação`
+- `refactor: refatoração`
+- `chore: tarefa técnica`
 - `test: testes`
-- `style: ajustes visuais ou formatacao`
+- `style: ajustes visuais ou formatação`
 
 ## Estrutura
 
@@ -52,7 +52,7 @@ assets/
 .github/
 ```
 
-## Execucao local
+## Execução local
 
 1. Suba o PostgreSQL:
 
@@ -73,7 +73,7 @@ dotnet build Veltis.Workspace.sln
 dotnet ef database update --project src/Veltis.Workspace.Infrastructure --startup-project src/Veltis.Workspace.Web
 ```
 
-4. Execute a aplicacao:
+4. Execute a aplicação:
 
 ```powershell
 dotnet run --project src/Veltis.Workspace.Web
@@ -85,22 +85,27 @@ dotnet run --project src/Veltis.Workspace.Web
 docker compose up --build
 ```
 
-A aplicacao fica disponivel em `http://localhost:8080`.
+A aplicação fica disponível em `http://localhost:8080`.
 
-## Autenticacao
+## Autenticação
 
-A fundacao usa ASP.NET Core Identity com `ApplicationUser` e `ApplicationRole`, pronta para evoluir com permissoes, papeis, politicas e auditoria.
+A fundação usa ASP.NET Core Identity com `ApplicationUser` e `ApplicationRole`, pronta para evoluir com permissões, papéis, políticas e auditoria.
 
-O seed inicial de roles e administrador fica desligado por padrao. Para habilitar, configure `Seed__RunOnStartup=true` e informe `Seed__AdminUser__Email` e `Seed__AdminUser__Password` por variavel de ambiente ou secret.
+O seed inicial de roles e administrador fica desligado por padrão. Para habilitar, configure `Seed__RunOnStartup=true` e informe `Seed__AdminUser__Email` e `Seed__AdminUser__Password` por variável de ambiente ou secret.
 
 ## Infraestrutura Compartilhada
 
-A Sprint 0.5 adiciona infraestrutura compartilhada para Result Pattern, paginacao, auditoria, soft delete, repositorios genericos, Unit of Work, seed inicial, tratamento global de erros e contratos futuros para IA.
+A Sprint 0.5 adiciona infraestrutura compartilhada para Result Pattern, paginação, auditoria, soft delete, repositórios genéricos, Unit of Work, seed inicial, tratamento global de erros e contratos futuros para IA.
 
 ## Sprint 1
 
-A fundacao funcional inicial inclui cadastro de profissoes, relacao usuario-profissao, workspace automatico por usuario, dashboard inicial e CRUD administrativo de profissoes, usuarios e roles.
+A fundação funcional inicial inclui cadastro de profissões, relação usuário-profissão, Workspace automático por usuário, dashboard inicial e CRUD administrativo de profissões, usuários e roles.
 
-## Documentacao
+## Sprint 0.8
 
-Os documentos da Sprint 0 estao em `docs/` e cobrem visao geral, arquitetura, stack, roadmap, backlog, padroes e estrutura.
+A fundação SaaS Enterprise prepara multi-tenant, feature flags, permissões granulares, billing base, observabilidade, auditoria, cache, storage, e-mail, filas, eventos e contratos de IA sem implementar IA real.
+
+## Documentação
+
+Os documentos da Sprint 0 estão em `docs/` e cobrem visão geral, arquitetura, stack, roadmap, backlog, padrões e estrutura.
+

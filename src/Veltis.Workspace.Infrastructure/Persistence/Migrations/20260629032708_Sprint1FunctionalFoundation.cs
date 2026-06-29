@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -107,9 +107,9 @@ namespace Veltis.Workspace.Infrastructure.Persistence.Migrations
                 columns: new[] { "Id", "Active", "Color", "CreatedAt", "DeletedAt", "Description", "Icon", "Name", "Slug", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("11111111-1111-1111-1111-111111111111"), true, "#0f766e", new DateTime(2026, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc), null, "Profissional juridico.", "scale", "Advogado", "advogado", null },
-                    { new Guid("22222222-2222-2222-2222-222222222222"), true, "#2563eb", new DateTime(2026, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc), null, "Profissional contabil e financeiro.", "calculator", "Contador", "contador", null },
-                    { new Guid("33333333-3333-3333-3333-333333333333"), true, "#7c3aed", new DateTime(2026, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc), null, "Profissional de consultoria.", "briefcase", "Consultor", "consultor", null }
+                    { new Guid("11111111-1111-1111-1111-111111111111"), true, "#0f766e", new DateTime(2026, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc), null, "Perfil profissional generico.", "user", "Perfil Base", "Perfil Base", null },
+                    { new Guid("22222222-2222-2222-2222-222222222222"), true, "#2563eb", new DateTime(2026, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc), null, "Perfil de gestao generico.", "settings", "Gestor", "Gestor", null },
+                    { new Guid("33333333-3333-3333-3333-333333333333"), true, "#7c3aed", new DateTime(2026, 6, 29, 0, 0, 0, 0, DateTimeKind.Utc), null, "Profissional de Analistaia.", "chart", "Analista", "Analista", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -188,3 +188,4 @@ namespace Veltis.Workspace.Infrastructure.Persistence.Migrations
         }
     }
 }
+

@@ -1,21 +1,22 @@
-# Infraestrutura Compartilhada
+﻿# Infraestrutura Compartilhada
 
-A Sprint 0.5 cria componentes reutilizaveis para reduzir retrabalho nas proximas sprints.
+A Sprint 0.5 cria componentes reutilizáveis para reduzir retrabalho nas próximas sprints.
 
 ## Componentes
 
 - Entidade base com auditoria e soft delete.
 - Result Pattern para respostas previsiveis.
-- Paginacao padronizada.
-- Repositorios genericos e Unit of Work.
-- Contratos de servicos base.
+- Paginação padronizada.
+- Repositórios genéricos e Unit of Work.
+- Contratos de serviços base.
 - Middleware global de erros.
 - Seed inicial preparado para roles e administrador opcional.
 
 ## Seed
 
-O seed cria as roles `Administrator`, `User` e `Professional`. A criacao do administrador depende de configuracao externa e deve ser habilitada com `Seed:RunOnStartup`.
+O seed cria as roles `Administrator`, `User` e `Professional`. A criação do administrador depende de configuração externa e deve ser habilitada com `Seed:RunOnStartup`.
 
-## Principio
+## Princípio
 
-Nada nesta infraestrutura deve conter regra especifica de profissao, dashboard, workspace, documentos ou agentes concretos.
+Nada nesta infraestrutura deve conter regra específica de profissão, dashboard, Workspace, documentos ou agentes concretos.
+

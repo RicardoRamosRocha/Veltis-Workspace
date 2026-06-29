@@ -1,17 +1,18 @@
-# Visao Geral
+﻿# Visão Geral
 
-Veltis Workspace e uma plataforma SaaS de produtividade profissional baseada em inteligencia artificial. O produto nasce com foco em organizacao, execucao assistida e automacao de fluxos profissionais, sustentado futuramente por um motor reutilizavel de agentes.
+Veltis Workspace é uma plataforma SaaS de produtividade profissional baseada em inteligência artificial. O produto nasce com foco em organização, execução assistida e automação de fluxos profissionais, sustentado futuramente por um motor reutilizável de agentes.
 
-Esta fundacao entrega a base tecnica para crescimento incremental, com autenticacao, persistencia, separacao de responsabilidades e documentacao inicial.
+Esta fundação entrega a base técnica para crescimento incremental, com autenticação, persistência, separação de responsabilidades e documentação inicial.
 
 ## Objetivos da Sprint 0
 
 - Criar a solution e os projetos base.
 - Configurar Clean Architecture.
 - Configurar ASP.NET Core MVC, Identity, Entity Framework Core e PostgreSQL.
-- Preparar Docker, GitHub Actions e documentacao.
+- Preparar Docker, GitHub Actions e documentação.
 - Entregar layout base responsivo com Tailwind CSS e suporte a dark mode.
 
 ## Fora de escopo
 
-Agentes, templates, marketplace, comunidade, dashboard, workspace e documentos serao implementados em sprints futuras.
+Agentes, templates, marketplace, comunidade, dashboard, Workspace e documentos serão implementados em sprints futuras.
+

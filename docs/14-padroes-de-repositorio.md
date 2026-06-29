@@ -1,17 +1,18 @@
-# Padroes de Repositorio
+﻿# Padrões de Repositório
 
-Foram criados contratos genericos para acesso a dados:
+Foram criados contratos genéricos para acesso a dados:
 
 - `IReadRepository<T>`
 - `IRepository<T>`
 - `IUnitOfWork`
 
-## Implementacao
+## Implementação
 
 `Repository<T>` e `UnitOfWork` ficam em Infrastructure, pois dependem de Entity Framework Core.
 
 ## Diretrizes
 
-- Usar repositorios genericos para operacoes basicas.
+- Usar repositórios genéricos para operações basicas.
 - Evitar repositories especificos antes de existir regra real que justifique.
-- Manter queries complexas em casos de uso ou especificacoes futuras.
+- Manter queries complexas em casos de uso ou específicações futuras.
+

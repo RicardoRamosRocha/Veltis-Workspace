@@ -3,7 +3,7 @@ using Veltis.Workspace.Domain.Identity;
 
 namespace Veltis.Workspace.Domain.Entities;
 
-public sealed class Workspace : BaseEntity
+public sealed class Workspace : TenantEntity
 {
     public Guid UserId { get; set; }
     public ApplicationUser? User { get; set; }

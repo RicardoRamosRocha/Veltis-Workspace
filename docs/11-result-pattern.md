@@ -1,4 +1,4 @@
-# Result Pattern
+﻿# Result Pattern
 
 O Result Pattern padroniza retornos de services e casos de uso.
 
@@ -6,8 +6,8 @@ O Result Pattern padroniza retornos de services e casos de uso.
 
 - `Result`: sucesso ou falha sem dados.
 - `Result<T>`: sucesso ou falha com dados.
-- `Error`: erro padrao com codigo e mensagem.
-- `ValidationError`: erro de validacao.
+- `Error`: erro padrão com código e mensagem.
+- `ValidationError`: erro de validação.
 
 ## Uso
 
@@ -18,8 +18,9 @@ Result<string>.Success("dados");
 Result<string>.Failure("Mensagem de erro");
 ```
 
-## Beneficios
+## Benefícios
 
 - Evita retornos desorganizados.
 - Reduz uso de excecoes para fluxo esperado.
-- Facilita validacoes e mensagens amigaveis.
+- Facilita validações e mensagens amigáveis.
+

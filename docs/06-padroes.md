@@ -1,48 +1,49 @@
-# Padroes
+﻿# Padrões
 
-## Codigo
+## Código
 
 - Usar C# com nullable reference types habilitado.
 - Preferir namespaces file-scoped.
 - Manter Domain livre de detalhes de infraestrutura.
-- Registrar dependencias por camada usando classes `DependencyInjection`.
-- Evitar acoplamento prematuro a modulos ainda nao implementados.
+- Registrar dependências por camada usando classes `DependencyInjection`.
+- Evitar acoplamento prematuro a módulos ainda não implementados.
 
 ## Branches
 
 - `main`: branch principal.
 - `feature/nome-da-funcionalidade`: novas funcionalidades.
-- `fix/nome-da-correcao`: correcoes.
-- `docs/nome-da-documentacao`: documentacao.
-- `chore/nome-da-tarefa`: tarefas tecnicas.
+- `fix/nome-da-correção`: correções.
+- `docs/nome-da-documentação`: documentação.
+- `chore/nome-da-tarefa`: tarefas técnicas.
 
 ## Commits
 
 - `feat: nova funcionalidade`
-- `fix: correcao`
-- `docs: documentacao`
-- `refactor: refatoracao`
-- `chore: tarefa tecnica`
+- `fix: correção`
+- `docs: documentação`
+- `refactor: refatoração`
+- `chore: tarefa técnica`
 - `test: testes`
-- `style: ajustes visuais ou formatacao`
+- `style: ajustes visuais ou formatação`
 
 ## Banco
 
 - Usar PostgreSQL como banco relacional principal.
-- Usar migrations do EF Core para evolucao de schema.
+- Usar migrations do EF Core para evolução de schema.
 - Manter schema dedicado `workspace`.
-- Usar identificadores `Guid` para usuarios e roles.
+- Usar identificadores `Guid` para usuários e roles.
 
 ## Web
 
 - Controllers MVC simples e focados.
 - Views Razor com Tailwind CSS.
 - Layout responsivo e preparado para dark mode.
-- Formularios com antiforgery token.
+- Formulários com antiforgery token.
 
-## Seguranca
+## Segurança
 
-- Identity como mecanismo base de autenticacao.
-- Cookies de autenticacao configurados explicitamente.
-- Validacao server-side em todos os formularios.
-- Configuracoes sensiveis via variaveis de ambiente em producao.
+- Identity como mecanismo base de autenticação.
+- Cookies de autenticação configurados explicitamente.
+- Validação server-side em todos os formulários.
+- Configurações sensíveis via variáveis de ambiente em produção.
+

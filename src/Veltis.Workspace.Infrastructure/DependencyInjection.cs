@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Veltis.Workspace.Application.Common.Events;
 using Veltis.Workspace.Application.Common.Interfaces;
 using Veltis.Workspace.Domain.Constants;
 using Veltis.Workspace.Domain.Identity;
+using Veltis.Workspace.Infrastructure.Events;
 using Veltis.Workspace.Infrastructure.Persistence;
 using Veltis.Workspace.Infrastructure.Services;
+using Veltis.Workspace.Infrastructure.Tenancy;
 
 namespace Veltis.Workspace.Infrastructure;
 
@@ -19,6 +23,11 @@ public static class DependencyInjection
         string connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
 
+        services.AddMemoryCache();
+
+        services.AddScoped<CurrentTenantService>();
+        services.AddScoped<ITenantProvider>(provider => provider.GetRequiredService<CurrentTenantService>());
+
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(connectionString, npgsql =>
                 npgsql.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
@@ -30,6 +39,13 @@ public static class DependencyInjection
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<ApplicationDbContextSeeder>();
         services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+        services.AddSingleton<ICacheService, MemoryCacheService>();
+        services.AddScoped<IStorageService, LocalStorageService>();
+        services.AddScoped<IFileStorageService, LocalStorageService>();
+        services.AddScoped<IEmailService, SmtpEmailService>();
+        services.AddScoped<IEmailSender, SmtpEmailService>();
+        services.AddSingleton<IJobQueue, InMemoryJobQueue>();
+        services.AddScoped<IEventPublisher, InProcessEventPublisher>();
 
         services
             .AddIdentity<ApplicationUser, ApplicationRole>(options =>

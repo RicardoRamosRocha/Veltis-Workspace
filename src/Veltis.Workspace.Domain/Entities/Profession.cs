@@ -2,7 +2,7 @@ using Veltis.Workspace.Domain.Common;
 
 namespace Veltis.Workspace.Domain.Entities;
 
-public sealed class Profession : BaseEntity
+public sealed class Profession : TenantEntity
 {
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }

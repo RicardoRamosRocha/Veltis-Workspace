@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Identity;
+using Veltis.Workspace.Domain.Common;
 using Veltis.Workspace.Domain.Entities;
 
 namespace Veltis.Workspace.Domain.Identity;
 
-public sealed class ApplicationUser : IdentityUser<Guid>
+public sealed class ApplicationUser : IdentityUser<Guid>, ITenantEntity
 {
     public ApplicationUser()
     {
@@ -11,6 +12,7 @@ public sealed class ApplicationUser : IdentityUser<Guid>
     }
 
     public string? DisplayName { get; set; }
+    public Guid? TenantId { get; set; }
     public Guid? ProfessionId { get; set; }
     public Profession? Profession { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;

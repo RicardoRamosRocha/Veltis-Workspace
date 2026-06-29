@@ -1,14 +1,15 @@
-# Code of Conduct
+﻿# Código de Conduta
 
 O Veltis Workspace deve ser um ambiente profissional, respeitoso e colaborativo.
 
 ## Compromissos
 
 - Tratar todas as pessoas com respeito.
-- Priorizar discussoes tecnicas objetivas.
-- Evitar linguagem ofensiva, ataques pessoais e discriminacao.
-- Preservar a confidencialidade de informacoes sensiveis.
+- Priorizar discussões técnicas objetivas.
+- Evitar linguagem ofensiva, ataques pessoais e discriminação.
+- Preservar a confidencialidade de informações sensíveis.
 
-## Aplicacao
+## Aplicação
 
-Condutas inadequadas devem ser reportadas aos mantenedores do projeto para analise e acao proporcional.
+Condutas inadequadas devem ser reportadas aos mantenedores do projeto para análise e ação proporcional.
+

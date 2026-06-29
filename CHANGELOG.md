@@ -1,11 +1,12 @@
-# Changelog
+﻿# Registro de Alterações
 
-Todas as mudancas relevantes do Veltis Workspace serao documentadas neste arquivo.
+Todas as mudanças relevantes do Veltis Workspace serão documentadas neste arquivo.
 
-## [Unreleased]
+## [Não Lançado]
 
-### Added
+### Adicionado
 
 - Infraestrutura compartilhada da Sprint 0.5.
-- Result Pattern, paginacao, auditoria, soft delete, repositorios genericos e Unit of Work.
+- Result Pattern, paginação, auditoria, soft delete, repositórios genéricos e Unit of Work.
 - Templates GitHub para pull requests, bugs e features.
+

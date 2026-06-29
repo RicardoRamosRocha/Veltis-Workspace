@@ -1,26 +1,31 @@
-# Arquitetura
+﻿# Arquitetura
 
-O Veltis Workspace segue Clean Architecture para preservar o dominio e manter infraestrutura, interface e detalhes externos substituiveis.
+O Veltis Workspace segue Clean Architecture para preservar o domínio e manter infraestrutura, interface e detalhes externos substituíveis.
 
 ## Camadas
 
-- `Domain`: entidades centrais, tipos de identidade e regras de dominio independentes.
-- `Application`: contratos, casos de uso futuros, validacoes e orquestracao.
-- `Infrastructure`: persistencia, Identity, PostgreSQL e integracoes externas.
-- `Web`: ASP.NET Core MVC, controllers, views, configuracao HTTP e composicao da aplicacao.
+- `Domain`: entidades centrais, tipos de identidade e regras de domínio independentes.
+- `Application`: contratos, casos de uso futuros, validações e orquestração.
+- `Infrastructure`: persistência, Identity, PostgreSQL e integrações externas.
+- `Web`: ASP.NET Core MVC, controllers, views, configuração HTTP e composição da aplicação.
 
-## Direcao de dependencias
+## Direção de dependências
 
-`Web` referencia `Application` e `Infrastructure`. `Infrastructure` referencia `Application` e `Domain`. `Application` referencia `Domain`. `Domain` nao depende das demais camadas.
+`Web` faz referência a `Application` e `Infrastructure`. `Infrastructure` faz referência a `Application` e `Domain`. `Application` faz referência a `Domain`. `Domain` não depende das demais camadas.
 
-## Persistencia
+## Persistência
 
-A persistencia usa Entity Framework Core com provider Npgsql para PostgreSQL. O schema inicial e `workspace`, isolando os objetos da aplicacao.
+A persistência usa Entity Framework Core com provedor Npgsql para PostgreSQL. O schema inicial é `workspace`, isolando os objetos da aplicação.
 
-## Autenticacao
+## Autenticação
 
-ASP.NET Core Identity foi configurado com `ApplicationUser` e `ApplicationRole` usando identificadores `Guid`. A estrutura esta pronta para evoluir com permissoes, roles de sistema, claims, politicas e auditoria.
+ASP.NET Core Identity foi configurado com `ApplicationUser` e `ApplicationRole` usando identificadores `Guid`. A estrutura está pronta para evoluir com permissões, roles de sistema, claims, políticas e auditoria.
 
 ## Sprint 1
 
-A Sprint 1 adiciona a estrutura funcional inicial sem alterar a arquitetura principal. Profissoes, relacao usuario-profissao, workspace do usuario, dashboard inicial e administracao usam as mesmas camadas: entidades no Domain, DTOs/services no Application, EF Core no Infrastructure e MVC no Web.
+A Sprint 1 adiciona a estrutura funcional inicial sem alterar a arquitetura principal. Profissões, relação usuário-profissão, Workspace do usuário, dashboard inicial e administração usam as mesmas camadas: entidades no Domain, DTOs/services no Application, EF Core no Infrastructure e MVC no Web.
+
+## Sprint 0.8
+
+A Sprint 0.8 adiciona fundamentos SaaS Enterprise: multi-tenant preparado, feature flags, permissões granulares, billing base, observabilidade, auditoria, cache, storage, e-mail, filas, eventos e contratos de IA.
+
