@@ -20,3 +20,7 @@ A persistencia usa Entity Framework Core com provider Npgsql para PostgreSQL. O 
 ## Autenticacao
 
 ASP.NET Core Identity foi configurado com `ApplicationUser` e `ApplicationRole` usando identificadores `Guid`. A estrutura esta pronta para evoluir com permissoes, roles de sistema, claims, politicas e auditoria.
+
+## Sprint 1
+
+A Sprint 1 adiciona a estrutura funcional inicial sem alterar a arquitetura principal. Profissoes, relacao usuario-profissao, workspace do usuario, dashboard inicial e administracao usam as mesmas camadas: entidades no Domain, DTOs/services no Application, EF Core no Infrastructure e MVC no Web.

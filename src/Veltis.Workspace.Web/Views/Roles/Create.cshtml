@@ -1,0 +1,8 @@
+@model Veltis.Workspace.Web.Models.Admin.RoleFormViewModel
+@{
+    ViewData["Title"] = "Nova role";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Roles", "Nova" })
+<h1 class="mb-6 text-3xl font-semibold tracking-tight">Nova role</h1>
+@await Html.PartialAsync("_RoleForm", Model)

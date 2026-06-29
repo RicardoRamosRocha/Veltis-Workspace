@@ -1,0 +1,26 @@
+@model Veltis.Workspace.Web.Models.Dashboard.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Inicio", "Dashboard" })
+
+<section class="space-y-6">
+    <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">Visao inicial</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight">Ola, @Model.UserName</h1>
+        <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">@Model.ProfessionName · @Model.WorkspaceName</p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        @await Html.PartialAsync("_MetricCard", ("Documentos", Model.DocumentsCount.ToString(), "Placeholder"))
+        @await Html.PartialAsync("_MetricCard", ("Agentes", Model.AgentsCount.ToString(), "Placeholder"))
+        @await Html.PartialAsync("_MetricCard", ("Templates", Model.TemplatesCount.ToString(), "Placeholder"))
+        @await Html.PartialAsync("_MetricCard", ("Historico", Model.HistoryCount.ToString(), "Placeholder"))
+    </div>
+
+    <div class="rounded border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <h2 class="text-lg font-semibold">Workspace</h2>
+        <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">@Model.WorkspaceName</p>
+    </div>
+</section>

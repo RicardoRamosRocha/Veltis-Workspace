@@ -1,0 +1,41 @@
+@model Veltis.Workspace.Web.Models.Admin.UserCreateViewModel
+@{
+    ViewData["Title"] = "Novo usuario";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Usuarios", "Novo" })
+<h1 class="mb-6 text-3xl font-semibold tracking-tight">Novo usuario</h1>
+
+<form method="post" class="max-w-2xl space-y-5 rounded border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    <div asp-validation-summary="ModelOnly" class="text-sm text-red-600"></div>
+    <div>
+        <label asp-for="DisplayName" class="text-sm font-medium">Nome</label>
+        <input asp-for="DisplayName" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950" />
+        <span asp-validation-for="DisplayName" class="text-sm text-red-600"></span>
+    </div>
+    <div>
+        <label asp-for="Email" class="text-sm font-medium">E-mail</label>
+        <input asp-for="Email" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950" />
+        <span asp-validation-for="Email" class="text-sm text-red-600"></span>
+    </div>
+    <div>
+        <label asp-for="ProfessionId" class="text-sm font-medium">Profissao</label>
+        <select asp-for="ProfessionId" asp-items="ViewBag.Professions" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="ProfessionId" class="text-sm text-red-600"></span>
+    </div>
+    <div>
+        <label asp-for="Password" class="text-sm font-medium">Senha</label>
+        <input asp-for="Password" type="password" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950" />
+        <span asp-validation-for="Password" class="text-sm text-red-600"></span>
+    </div>
+    <label class="flex items-center gap-2 text-sm">
+        <input asp-for="IsActive" class="h-4 w-4 rounded border-zinc-300" />
+        Ativo
+    </label>
+    <div class="flex gap-3">
+        <button type="submit" class="rounded bg-zinc-950 px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-zinc-950">Salvar</button>
+        <a asp-action="Index" class="rounded border border-zinc-300 px-4 py-2 text-sm font-semibold dark:border-zinc-700">Cancelar</a>
+    </div>
+</form>

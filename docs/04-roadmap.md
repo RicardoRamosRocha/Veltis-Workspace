@@ -10,16 +10,17 @@
 
 ## Sprint 1 - Experiencia Autenticada
 
-- Area inicial autenticada.
-- Perfil do usuario.
-- Roles e politicas iniciais.
-- Observabilidade basica.
+- Dashboard inicial autenticado.
+- Cadastro de profissoes.
+- Relacao inicial entre usuario e profissao.
+- Workspace criado automaticamente para cada usuario.
+- CRUD administrativo de profissoes, usuarios e roles.
 
 ## Sprint 2 - Workspace
 
-- Estrutura de organizacoes, membros e areas de trabalho.
-- Convites e controle de acesso.
-- Auditoria inicial.
+- Evolucao do workspace.
+- Estrutura de organizacoes e membros.
+- Convites e controle de acesso refinado.
 
 ## Sprint 3 - Motor de Agentes
 

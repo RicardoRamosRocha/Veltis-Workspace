@@ -97,6 +97,10 @@ O seed inicial de roles e administrador fica desligado por padrao. Para habilita
 
 A Sprint 0.5 adiciona infraestrutura compartilhada para Result Pattern, paginacao, auditoria, soft delete, repositorios genericos, Unit of Work, seed inicial, tratamento global de erros e contratos futuros para IA.
 
+## Sprint 1
+
+A fundacao funcional inicial inclui cadastro de profissoes, relacao usuario-profissao, workspace automatico por usuario, dashboard inicial e CRUD administrativo de profissoes, usuarios e roles.
+
 ## Documentacao
 
 Os documentos da Sprint 0 estao em `docs/` e cobrem visao geral, arquitetura, stack, roadmap, backlog, padroes e estrutura.

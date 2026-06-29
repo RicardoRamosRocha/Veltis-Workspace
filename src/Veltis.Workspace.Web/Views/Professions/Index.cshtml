@@ -1,0 +1,27 @@
+@model IReadOnlyCollection<Veltis.Workspace.Application.Professions.ProfessionDto>
+@{
+    ViewData["Title"] = "Profissoes";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Profissoes" })
+
+<div class="mb-6 flex items-center justify-between gap-4">
+    <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Profissoes</h1>
+        <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">Cadastro administrativo de profissoes da plataforma.</p>
+    </div>
+    <a class="rounded bg-zinc-950 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950" asp-action="Create">Nova</a>
+</div>
+
+@{
+    string[] headers = ["Nome", "Slug", "Status", "Acoes"];
+    IEnumerable<string[]> rows = Model.Select(profession => new[]
+    {
+        profession.Name,
+        profession.Slug,
+        profession.Active ? "Ativa" : "Inativa",
+        $"<a class='font-semibold text-teal-700 dark:text-teal-300' href='/admin/professions/edit/{profession.Id}'>Editar</a>"
+    });
+}
+
+@await Html.PartialAsync("_DataTable", (headers, rows))

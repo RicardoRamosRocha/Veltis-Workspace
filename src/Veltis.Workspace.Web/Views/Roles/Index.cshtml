@@ -1,0 +1,23 @@
+@model IReadOnlyCollection<Veltis.Workspace.Domain.Identity.ApplicationRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Roles" })
+<div class="mb-6 flex items-center justify-between gap-4">
+    <h1 class="text-3xl font-semibold tracking-tight">Roles</h1>
+    <a class="rounded bg-zinc-950 px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-zinc-950" asp-action="Create">Nova</a>
+</div>
+
+@{
+    string[] headers = ["Nome", "Descricao", "Sistema", "Acoes"];
+    IEnumerable<string[]> rows = Model.Select(role => new[]
+    {
+        role.Name ?? string.Empty,
+        role.Description ?? string.Empty,
+        role.IsSystemRole ? "Sim" : "Nao",
+        $"<a class='font-semibold text-teal-700 dark:text-teal-300' href='/admin/roles/edit/{role.Id}'>Editar</a>"
+    });
+}
+
+@await Html.PartialAsync("_DataTable", (headers, rows))

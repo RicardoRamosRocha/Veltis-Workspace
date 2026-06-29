@@ -1,0 +1,16 @@
+@model IEnumerable<string>
+
+<nav class="mb-6 text-sm text-zinc-500" aria-label="Breadcrumb">
+    <ol class="flex flex-wrap items-center gap-2">
+        @foreach (string item in Model)
+        {
+            <li class="flex items-center gap-2">
+                <span>@item</span>
+                @if (item != Model.Last())
+                {
+                    <span>/</span>
+                }
+            </li>
+        }
+    </ol>
+</nav>

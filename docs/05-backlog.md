@@ -2,7 +2,6 @@
 
 ## Plataforma
 
-- Criar migrations iniciais do Identity.
 - Implementar health checks.
 - Configurar logs estruturados.
 - Adicionar politicas de autorizacao.
@@ -10,11 +9,11 @@
 
 ## Produto
 
-- Criar area autenticada inicial.
-- Modelar workspaces.
+- Evoluir dashboard com metricas reais.
 - Modelar documentos.
 - Modelar templates.
 - Modelar motor de agentes.
+- Criar gestao avancada de perfil do usuario.
 
 ## Qualidade
 

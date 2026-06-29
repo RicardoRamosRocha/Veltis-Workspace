@@ -40,11 +40,18 @@
         <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-[16rem_1fr]">
             <aside class="hidden border-r border-zinc-200 px-4 py-6 dark:border-zinc-800 lg:block">
                 <nav class="space-y-1 text-sm">
-                    <a class="flex rounded px-3 py-2 font-medium text-zinc-900 hover:bg-zinc-100 dark:text-zinc-100 dark:hover:bg-zinc-900" asp-controller="Home" asp-action="Index">Inicio</a>
-                    <span class="flex rounded px-3 py-2 text-zinc-500">Agentes</span>
-                    <span class="flex rounded px-3 py-2 text-zinc-500">Templates</span>
+                    <a class="flex rounded px-3 py-2 font-medium text-zinc-900 hover:bg-zinc-100 dark:text-zinc-100 dark:hover:bg-zinc-900" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
                     <span class="flex rounded px-3 py-2 text-zinc-500">Workspace</span>
-                    <span class="flex rounded px-3 py-2 text-zinc-500">Configuracoes</span>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Documentos</span>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Templates</span>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Historico</span>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <div class="pt-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Admin</div>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" asp-controller="Professions" asp-action="Index">Profissoes</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" asp-controller="Users" asp-action="Index">Usuarios</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" asp-controller="Roles" asp-action="Index">Roles</a>
+                    }
                 </nav>
             </aside>
             <main class="min-h-[calc(100vh-8rem)] px-4 py-8 sm:px-6 lg:px-8">

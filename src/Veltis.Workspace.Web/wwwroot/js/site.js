@@ -14,4 +14,12 @@
       window.localStorage.setItem(storageKey, root.classList.contains("dark") ? "dark" : "light");
     });
   });
+
+  document.querySelectorAll("[data-modal-close]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const modal = document.getElementById(button.getAttribute("data-modal-close"));
+      modal?.classList.add("hidden");
+      modal?.classList.remove("flex");
+    });
+  });
 })();

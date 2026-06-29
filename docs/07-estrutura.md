@@ -5,6 +5,7 @@ src/
   Veltis.Workspace.Domain/
     Common/
     Constants/
+    Entities/
     Identity/
   Veltis.Workspace.Application/
     Common/
@@ -12,6 +13,9 @@ src/
       Pagination/
       Results/
       Validation/
+    Dashboard/
+    Professions/
+    Workspaces/
   Veltis.Workspace.Infrastructure/
     Identity/
     Persistence/

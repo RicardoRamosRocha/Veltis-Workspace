@@ -24,6 +24,7 @@ appsettings.*.local.json
 node_modules/
 dist/
 tmp/
+.tmp/
 logs/
 *.log
 

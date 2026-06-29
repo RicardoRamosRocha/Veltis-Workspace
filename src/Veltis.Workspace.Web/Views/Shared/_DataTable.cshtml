@@ -1,0 +1,27 @@
+@model (string[] Headers, IEnumerable<string[]> Rows)
+
+<div class="overflow-hidden rounded border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-zinc-200 text-sm dark:divide-zinc-800">
+            <thead class="bg-zinc-50 text-left dark:bg-zinc-950">
+                <tr>
+                    @foreach (string header in Model.Headers)
+                    {
+                        <th class="px-4 py-3 font-semibold">@header</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+                @foreach (string[] row in Model.Rows)
+                {
+                    <tr>
+                        @foreach (string cell in row)
+                        {
+                            <td class="px-4 py-3 text-zinc-600 dark:text-zinc-300">@Html.Raw(cell)</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

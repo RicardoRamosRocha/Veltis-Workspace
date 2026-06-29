@@ -1,0 +1,24 @@
+@model IReadOnlyCollection<Veltis.Workspace.Web.Models.Admin.UserAdminViewModel>
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Usuarios" })
+<div class="mb-6 flex items-center justify-between gap-4">
+    <h1 class="text-3xl font-semibold tracking-tight">Usuarios</h1>
+    <a class="rounded bg-zinc-950 px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-zinc-950" asp-action="Create">Novo</a>
+</div>
+
+@{
+    string[] headers = ["Nome", "E-mail", "Profissao", "Status", "Acoes"];
+    IEnumerable<string[]> rows = Model.Select(user => new[]
+    {
+        user.DisplayName,
+        user.Email,
+        user.ProfessionName,
+        user.IsActive ? "Ativo" : "Inativo",
+        $"<a class='font-semibold text-teal-700 dark:text-teal-300' href='/admin/users/edit/{user.Id}'>Editar</a>"
+    });
+}
+
+@await Html.PartialAsync("_DataTable", (headers, rows))
