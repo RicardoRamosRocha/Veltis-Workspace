@@ -7,10 +7,13 @@ using Veltis.Workspace.Application.Common.Events;
 using Veltis.Workspace.Application.Common.Interfaces;
 using Veltis.Workspace.Domain.Constants;
 using Veltis.Workspace.Domain.Identity;
+using Veltis.Workspace.Application.AI;
+using Veltis.Workspace.Infrastructure.AI.OpenAI;
 using Veltis.Workspace.Infrastructure.Events;
 using Veltis.Workspace.Infrastructure.Persistence;
 using Veltis.Workspace.Infrastructure.Services;
 using Veltis.Workspace.Infrastructure.Tenancy;
+using Veltis.Workspace.Infrastructure.AI.Gemini;
 
 namespace Veltis.Workspace.Infrastructure;
 
@@ -24,6 +27,30 @@ public static class DependencyInjection
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
 
         services.AddMemoryCache();
+        services.Configure<AiProviderOptions>(configuration.GetSection("AI"));
+        services.Configure<OpenAiOptions>(configuration.GetSection("AI:OpenAI"));
+
+        var defaultProvider = configuration["AI:DefaultProvider"];
+
+        if (string.Equals(defaultProvider, "Gemini", StringComparison.OrdinalIgnoreCase))
+        {
+            services.AddHttpClient<IAiChatProvider, GeminiChatProvider>(client =>
+            {
+                client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
+            });
+        }
+        else
+        {
+            services.AddHttpClient<IAiChatProvider, OpenAiChatProvider>((provider, client) =>
+            {
+                AiProviderOptions options = provider.GetRequiredService<Microsoft.Extensions.Options.IOptions<AiProviderOptions>>().Value;
+                string baseUrl = string.IsNullOrWhiteSpace(options.OpenAI.BaseUrl)
+                    ? "https://api.openai.com/v1"
+                    : options.OpenAI.BaseUrl.TrimEnd('/');
+
+                client.BaseAddress = new Uri(baseUrl + "/");
+            });
+        }
 
         services.AddScoped<CurrentTenantService>();
         services.AddScoped<ITenantProvider>(provider => provider.GetRequiredService<CurrentTenantService>());

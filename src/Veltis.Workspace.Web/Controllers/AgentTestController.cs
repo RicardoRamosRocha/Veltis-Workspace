@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Veltis.Workspace.Application.Agents.Execution;
+using Veltis.Workspace.Domain.Constants;
 
 namespace Veltis.Workspace.Web.Controllers;
 
-[Authorize(Roles = "Administrator")]
+[Authorize(Roles = ApplicationRoles.AdminAccess)]
 public class AgentTestController : Controller
 {
     private readonly IAgentExecutionPipeline _pipeline;
@@ -38,9 +39,6 @@ public class AgentTestController : Controller
 
         var result = await _pipeline.ExecuteAsync(request);
 
-        ViewBag.Prompt = result.Prompt;
-        ViewBag.Response = result.Response;
-
-        return View();
+        return View(result);
     }
 }

@@ -41,4 +41,4 @@ O dashboard em `/admin` exibe contadores de:
 
 ## Limites da Sprint
 
-Esta sprint não integra OpenAI, Gemini ou qualquer provider real. O painel apenas configura dados existentes para uso futuro pelo Framework Universal de Agentes.
+O painel administrativo não executa agentes nem chama providers de IA. Ele apenas configura dados usados pelo Framework Universal de Agentes e pela tela de teste do pipeline.
