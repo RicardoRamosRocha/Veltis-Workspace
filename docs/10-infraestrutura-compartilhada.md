@@ -14,7 +14,7 @@ A Sprint 0.5 cria componentes reutilizáveis para reduzir retrabalho nas próxim
 
 ## Seed
 
-O seed cria as roles `Administrator`, `User` e `Professional`. A criação do administrador depende de configuração externa e deve ser habilitada com `Seed:RunOnStartup`.
+O seed cria as roles `Administrator`, `Gestor`, `User` e `Professional`. A criação do administrador depende de configuração externa e deve ser habilitada com `Seed:RunOnStartup`.
 
 ## Princípio
 

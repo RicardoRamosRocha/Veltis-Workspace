@@ -1,0 +1,15 @@
+@model Veltis.Workspace.Application.Forms.DynamicFormRenderModel
+@{
+    ViewData["Title"] = "Preview do Formulário";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Formulários Dinâmicos", "Preview" })
+
+<div class="mb-6">
+    <h1 class="text-3xl font-semibold tracking-tight">Preview do Formulário</h1>
+    <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">Visualização gerada pelo Dynamic Form Engine.</p>
+</div>
+
+<section class="rounded border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    <partial name="Forms/_DynamicForm" model="Model" />
+</section>

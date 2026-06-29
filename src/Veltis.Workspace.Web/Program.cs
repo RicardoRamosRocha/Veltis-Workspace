@@ -4,6 +4,7 @@ using Veltis.Workspace.Infrastructure.Persistence;
 using Veltis.Workspace.Web.Middleware;
 using Veltis.Workspace.Web.Services;
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Authentication;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<Veltis.Workspace.Application.Common.Interfaces.ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<IClaimsTransformation, GestorClaimsTransformation>();
 builder.Services.AddHealthChecks();
 builder.Services.AddRateLimiter(options =>
 {

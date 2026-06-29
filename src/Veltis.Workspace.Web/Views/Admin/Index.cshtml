@@ -1,0 +1,32 @@
+@model Veltis.Workspace.Web.Models.Admin.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", "Dashboard" })
+
+<div class="mb-6">
+    <h1 class="text-3xl font-semibold tracking-tight">Painel Administrativo</h1>
+    <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-300">Configuração inicial da plataforma antes da integração real com IA.</p>
+</div>
+
+<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    @await Html.PartialAsync("_MetricCard", ("Profissões", Model.Professions.ToString(), "Cadastros profissionais"))
+    @await Html.PartialAsync("_MetricCard", ("Agentes", Model.Agents.ToString(), "Agentes configurados"))
+    @await Html.PartialAsync("_MetricCard", ("Formulários", Model.Forms.ToString(), "Dynamic Form Engine"))
+    @await Html.PartialAsync("_MetricCard", ("Prompts", Model.Prompts.ToString(), "Templates"))
+    @await Html.PartialAsync("_MetricCard", ("Providers", Model.Providers.ToString(), "Provedores de IA"))
+    @await Html.PartialAsync("_MetricCard", ("Modelos", Model.Models.ToString(), "Modelos disponíveis"))
+    @await Html.PartialAsync("_MetricCard", ("Tenants", Model.Tenants.ToString(), "Ambientes SaaS"))
+    @await Html.PartialAsync("_MetricCard", ("Planos", Model.Plans.ToString(), "Billing"))
+    @await Html.PartialAsync("_MetricCard", ("Usuários", Model.Users.ToString(), "Identity"))
+</div>
+
+<section class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <a class="vw-card block hover:border-zinc-400" href="/admin/agent-categories">Categorias de Agentes</a>
+    <a class="vw-card block hover:border-zinc-400" href="/admin/agents">Agentes</a>
+    <a class="vw-card block hover:border-zinc-400" href="/admin/form-definitions">Formulários Dinâmicos</a>
+    <a class="vw-card block hover:border-zinc-400" href="/admin/prompts">Prompts</a>
+    <a class="vw-card block hover:border-zinc-400" href="/admin/ai-providers">Providers de IA</a>
+    <a class="vw-card block hover:border-zinc-400" href="/admin/ai-models">Modelos de IA</a>
+</section>

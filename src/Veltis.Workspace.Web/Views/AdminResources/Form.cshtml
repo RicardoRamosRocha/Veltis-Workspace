@@ -1,0 +1,74 @@
+@using Veltis.Workspace.Application.Admin
+@using Veltis.Workspace.Domain.Agents
+@model Veltis.Workspace.Web.Models.Admin.AdminResourceFormViewModel
+@{
+    ViewData["Title"] = Model.Id.HasValue ? $"Editar {Model.Title}" : $"Novo {Model.Title}";
+}
+
+@await Html.PartialAsync("_Breadcrumb", new[] { "Admin", Model.Title, Model.Id.HasValue ? "Editar" : "Novo" })
+
+<div class="mb-6">
+    <h1 class="text-3xl font-semibold tracking-tight">@ViewData["Title"]</h1>
+</div>
+
+<form method="post" class="max-w-5xl space-y-5 rounded border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-sm text-red-600"></div>
+
+    @foreach (var field in Model.Fields)
+    {
+        string name = field.Spec.Name;
+        string value = Model.Values.TryGetValue(name, out string? fieldValue) ? fieldValue ?? string.Empty : string.Empty;
+
+        <div>
+            <label class="text-sm font-medium" for="Values_@name">@field.Spec.Label</label>
+            @switch (field.Spec.Kind)
+            {
+                case AdminFieldKind.TextArea:
+                case AdminFieldKind.Json:
+                    <textarea name="Values[@name]" id="Values_@name" rows="@(field.Spec.Kind == AdminFieldKind.Json ? 10 : 5)" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 font-mono text-sm dark:border-zinc-700 dark:bg-zinc-950">@value</textarea>
+                    break;
+                case AdminFieldKind.Boolean:
+                    <input type="hidden" name="Values[@name]" value="false" />
+                    <label class="mt-2 flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="Values[@name]" value="true" checked="@(value.Equals("true", StringComparison.OrdinalIgnoreCase))" class="h-4 w-4 rounded border-zinc-300" />
+                        Ativo
+                    </label>
+                    break;
+                case AdminFieldKind.Select:
+                    <select name="Values[@name]" id="Values_@name" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950">
+                        <option value="">Selecione</option>
+                        @foreach (var option in field.Options)
+                        {
+                            <option value="@option.Value" selected="@(option.Value == value)">@option.Text</option>
+                        }
+                    </select>
+                    break;
+                case AdminFieldKind.Enum:
+                    <select name="Values[@name]" id="Values_@name" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950">
+                        @foreach (string option in Enum.GetNames<AgentExecutionMode>())
+                        {
+                            <option value="@option" selected="@(option == value)">@option</option>
+                        }
+                    </select>
+                    break;
+                case AdminFieldKind.Number:
+                    <input type="number" name="Values[@name]" id="Values_@name" value="@value" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950" />
+                    break;
+                case AdminFieldKind.Decimal:
+                    <input type="number" step="0.01" name="Values[@name]" id="Values_@name" value="@value" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950" />
+                    break;
+                default:
+                    <input name="Values[@name]" id="Values_@name" value="@value" class="mt-2 w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950" />
+                    break;
+            }
+            <span class="text-sm text-red-600" data-valmsg-for="Values[@name]"></span>
+            @Html.ValidationMessage($"Values[{name}]", new { @class = "text-sm text-red-600" })
+        </div>
+    }
+
+    <div class="flex gap-3">
+        <button type="submit" class="vw-button">Salvar</button>
+        <a href="/admin/@Model.Resource" class="rounded border border-zinc-300 px-4 py-2 text-sm font-semibold dark:border-zinc-700">Cancelar</a>
+    </div>
+</form>

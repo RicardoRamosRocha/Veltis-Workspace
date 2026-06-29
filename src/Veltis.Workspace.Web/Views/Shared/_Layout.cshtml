@@ -45,12 +45,23 @@
                     <span class="flex rounded px-3 py-2 text-zinc-500">Documentos</span>
                     <span class="flex rounded px-3 py-2 text-zinc-500">Templates</span>
                     <span class="flex rounded px-3 py-2 text-zinc-500">Historico</span>
-                    @if (User.IsInRole("Administrator"))
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Gestor"))
                     {
                         <div class="pt-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Admin</div>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin">Dashboard Admin</a>
                         <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" asp-controller="Professions" asp-action="Index">Profissoes</a>
                         <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" asp-controller="Users" asp-action="Index">Usuarios</a>
                         <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" asp-controller="Roles" asp-action="Index">Roles</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/agent-categories">Categorias de Agentes</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/agents">Agentes</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/prompts">Prompts</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/form-definitions">Formulários Dinâmicos</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/ai-providers">Providers de IA</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/ai-models">Modelos de IA</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/tenants">Tenants</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/feature-flags">Feature Flags</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/plans">Planos</a>
+                        <a class="flex rounded px-3 py-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900" href="/admin/audit">Auditoria</a>
                     }
                 </nav>
             </aside>

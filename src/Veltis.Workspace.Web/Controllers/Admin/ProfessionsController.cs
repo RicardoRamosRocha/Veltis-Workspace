@@ -7,7 +7,7 @@ using Veltis.Workspace.Web.Models.Admin;
 
 namespace Veltis.Workspace.Web.Controllers.Admin;
 
-[Authorize(Roles = ApplicationRoles.Administrator)]
+[Authorize(Roles = ApplicationRoles.AdminAccess)]
 [Route("admin/professions")]
 public sealed class ProfessionsController : Controller
 {
