@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: veltis-workspace-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: veltis_workspace
+      POSTGRES_USER: veltis
+      POSTGRES_PASSWORD: veltis_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - veltis_workspace_postgres:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veltis -d veltis_workspace"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: veltis-workspace-web
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=veltis_workspace;Username=veltis;Password=veltis_dev_password
+    ports:
+      - "8080:8080"
+
+volumes:
+  veltis_workspace_postgres:

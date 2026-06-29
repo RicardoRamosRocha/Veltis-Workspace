@@ -1,0 +1,14 @@
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}

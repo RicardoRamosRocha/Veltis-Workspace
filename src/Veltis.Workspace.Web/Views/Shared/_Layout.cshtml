@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Veltis Workspace</title>
+    <script>
+        tailwind = { config: { darkMode: 'class' } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="h-full bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50">
+    <div class="min-h-full">
+        <header class="sticky top-0 z-30 border-b border-zinc-200 bg-white/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90">
+            <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                <a class="flex items-center gap-3 font-semibold tracking-tight" asp-controller="Home" asp-action="Index">
+                    <span class="grid h-9 w-9 place-items-center rounded bg-zinc-950 text-sm font-bold text-white dark:bg-white dark:text-zinc-950">VW</span>
+                    <span>Veltis Workspace</span>
+                </a>
+                <div class="flex items-center gap-2">
+                    <button type="button" data-theme-toggle class="rounded border border-zinc-300 px-3 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900">
+                        Tema
+                    </button>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <form asp-controller="Account" asp-action="Logout" method="post">
+                            <button type="submit" class="rounded bg-zinc-950 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200">Sair</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="hidden rounded px-3 py-2 text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 sm:inline-flex" asp-controller="Account" asp-action="Login">Entrar</a>
+                        <a class="rounded bg-zinc-950 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200" asp-controller="Account" asp-action="Register">Criar conta</a>
+                    }
+                </div>
+            </nav>
+        </header>
+
+        <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-[16rem_1fr]">
+            <aside class="hidden border-r border-zinc-200 px-4 py-6 dark:border-zinc-800 lg:block">
+                <nav class="space-y-1 text-sm">
+                    <a class="flex rounded px-3 py-2 font-medium text-zinc-900 hover:bg-zinc-100 dark:text-zinc-100 dark:hover:bg-zinc-900" asp-controller="Home" asp-action="Index">Inicio</a>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Agentes</span>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Templates</span>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Workspace</span>
+                    <span class="flex rounded px-3 py-2 text-zinc-500">Configuracoes</span>
+                </nav>
+            </aside>
+            <main class="min-h-[calc(100vh-8rem)] px-4 py-8 sm:px-6 lg:px-8">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-t border-zinc-200 py-5 text-sm text-zinc-500 dark:border-zinc-800">
+            <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+                <span>&copy; 2026 Veltis Workspace</span>
+                <span>Fundacao SaaS preparada para crescimento.</span>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
